@@ -1,0 +1,18 @@
+include MANIFEST.in
+include requirements.txt
+include *.json
+include *.md
+include *.py
+include *.txt
+recursive-include herjimar *.css
+recursive-include herjimar *.csv
+recursive-include herjimar *.html
+recursive-include herjimar *.ico
+recursive-include herjimar *.js
+recursive-include herjimar *.json
+recursive-include herjimar *.md
+recursive-include herjimar *.png
+recursive-include herjimar *.py
+recursive-include herjimar *.svg
+recursive-include herjimar *.txt
+recursive-exclude herjimar *.pyc
