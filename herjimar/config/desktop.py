@@ -7,8 +7,10 @@ def get_data():
 		{
 			"module_name": "Herjimar",
 			"color": "grey",
+			"category": "Modules",
 			"icon": "octicon octicon-file-directory",
 			"type": "module",
-			"label": _("Herjimar")
+			"label": _("Herjimar"),
+			"description": "Personalizacion de Herjimar."
 		}
 	]

@@ -1,0 +1,6 @@
+{
+"herjimar/js/herjimar.js": ["public/js/herjimar.js"],
+"herjimar/js/timesheet_list.js": ["public/js/timesheet_list.js"],
+"herjimar/js/evaluacion_list.js": ["public/js/evaluacion_list.js"],
+"herjimar/js/riesgo_list.js": ["public/js/riesgo_list.js"]
+}

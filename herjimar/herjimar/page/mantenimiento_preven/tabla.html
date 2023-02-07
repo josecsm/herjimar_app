@@ -1,0 +1,38 @@
+<div class="div_main">
+
+    <div style="padding: 20px;padding-bottom: 0px;" class="row">
+
+        {% var indice = 0; %}
+        {% for maquina in maquinas %}
+         <div class="filtro-codigo col-md-4">
+            <div  style="margin:auto; padding: 10px;" class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
+                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{maquina.name}}</h5>
+                    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Clase: {{maquina.clase}}/{{maquina.tipo_de_equipo}}</p>
+                    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Código: {{maquina.código_mh}}</p>
+                    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Equipo: {{maquina.marca}} {{maquina.modelo }} {{maquina.número_de_serie }}</p>
+                <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Asignado: {{maquina.operario}}</p>
+                <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Revisión: {{maquina.fecha_próxima_acción}}</p>
+                
+                <button onclick="frappe.pages.mantenimiento_preven.realizar_mantenimiento(event);" data-maquina="{{maquina.name}}" data-intensidad="{{maquina.intensidad_marcada_1}}_{{maquina.intensidad_marcada_2}}_{{maquina.intensidad_marcada_3}}" data-voltaje="{{maquina.voltaje_marcado_1}}_{{maquina.voltaje_marcado_2}}_{{maquina.voltaje_marcado_3}}" data-hacer="{{maquina.operación_a_realizar}}" data-plantilla="{{maquina.plantilla_excel}}" data-medidas="{{maquina.primera_medida}}_{{maquina.segunda_medida}}_{{maquina.tercera_medida}}" class="btn btn-primary btn-sm primary-action">
+                    Realizar Mantenimiento Preventivo
+                </button>
+
+            </div>
+        </div>
+
+        {% indice=indice+1 %}
+
+        {% if((indice % 3)==0) { %}
+    </div>
+    <div style="padding: 20px;padding-bottom: 0px;" class="row">
+        {% } %}
+
+        {% endfor %}
+       
+
+    </div>
+    <BR/>
+    <BR/>
+    <BR/>
+</div>
+

@@ -16,19 +16,26 @@ app_license = "MIT"
 
 # include js, css files in header of desk.html
 # app_include_css = "/assets/herjimar/css/herjimar.css"
-# app_include_js = "/assets/herjimar/js/herjimar.js"
+app_include_js = ["/assets/herjimar/js/herjimar.js","/assets/herjimar/js/timesheet_list.js","/assets/herjimar/js/riesgo_list.js","/assets/herjimar/js/evaluacion_list.js"]
 
 # include js, css files in header of web template
 # web_include_css = "/assets/herjimar/css/herjimar.css"
 # web_include_js = "/assets/herjimar/js/herjimar.js"
 
 # include js in page
-# page_js = {"page" : "public/js/file.js"}
+# page_js = {"page" : "public/js/file.js"} 
 
 # include js in doctype views
 # doctype_js = {"doctype" : "public/js/doctype.js"}
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
-# doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
+doctype_list_js = {
+    "Timesheet": "public/js/timesheet_list.js",
+    "Riesgo": "public/js/riesgo_list.js",
+    "Evaluacion del Desempeno": "public/js/evaluacion_list.js"
+}
+#    "Timesheet": "public/js/timesheet_list.js",
+
+# # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
 # doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}
 
 # Home Pages
@@ -78,7 +85,6 @@ app_license = "MIT"
 # Document Events
 # ---------------
 # Hook on document methods and events
-
 # doc_events = {
 # 	"*": {
 # 		"on_update": "method",
@@ -86,7 +92,63 @@ app_license = "MIT"
 # 		"on_trash": "method"
 #	}
 # }
-
+doc_events = {
+    "Incidencia":{
+        "after_insert": "herjimar.crud_events.after_insert_Incidencia",
+        "on_update": "herjimar.crud_events.on_update_Incidencia"
+    },
+    "Hoja Verde":{
+        "after_insert": "herjimar.crud_events.after_insert_HV",
+        "on_update": "herjimar.crud_events.on_update_HV"
+    },
+    "Task":{
+        "on_update": "herjimar.crud_events.on_update_Task"
+    },
+    "Project":{
+        "after_insert": "herjimar.crud_events.after_insert_proyecto",
+         "on_update": "herjimar.crud_events.on_update_proyecto"
+    },
+    "Quotation":{
+        "before_save": "herjimar.crud_events.before_save_quotation",
+       # "after_save": "herjimar.crud_events.on_update_quotation",
+       # "on_update": "herjimar.crud_events.on_update_quotation"
+    },
+    "Shift Request":{
+        "on_submit": "herjimar.crud_events.on_submit_shift_request", 
+    },
+    "Leave Application":{
+        "on_submit": "herjimar.crud_events.on_submit_leave_application", 
+    },
+    "Revision Equipamiento":{
+        "after_insert":"herjimar.crud_events.after_insert_revision_equipamiento",
+    },
+    #"Task":{
+    #    "before_insert": "herjimar.crud_events.before_insert_task"
+    #},
+    #"Task":{
+    #    "before_insert": "herjimar.crud_events.after_insert_File",
+    ##    "after_insert": "herjimar.crud_events.after_insert_File",
+    #    "before_save": "herjimar.crud_events.after_insert_File",
+    #    "on_update": "herjimar.crud_events.after_insert_File"
+    #},
+    #"File": {
+  	#	"before_insert": "pibiapp.nextcloud.nextcloud_link.nextcloud_before_insert",
+ 	#	"after_insert": "pibiapp.nextcloud.nextcloud_link.nextcloud_insert",
+ 	#	"on_trash": "pibiapp.nextcloud.nextcloud_link.nextcloud_before_delete",
+ 	#	"after_delete": "pibiapp.nextcloud.nextcloud_link.nextcloud_delete",
+ 	#	"get_content": "pibiapp.nextcloud.nextcloud_link.get_content"
+	#},
+    "Issue":{
+        "after_insert": "herjimar.crud_events.after_insert_Issue",
+    },
+    "File":{
+    #    "before_insert": "herjimar.crud_events.after_insert_File",
+        "after_insert": "herjimar.crud_events.after_insert_File",
+        "after_delete": "herjimar.crud_events.after_delete_File",
+    #    "before_save": "herjimar.crud_events.after_insert_File",
+    #    "on_update": "herjimar.crud_events.after_insert_File"
+    }
+}
 # Scheduled Tasks
 # ---------------
 
@@ -126,5 +188,8 @@ app_license = "MIT"
 # override_doctype_dashboards = {
 # 	"Task": "herjimar.task.get_dashboard_data"
 # }
+override_doctype_dashboards = {
+#    "Hoja Verde": "herjimar.herjimar.hoja_verde_dashboard"
+}
 
 fixtures = ['Custom Field']
