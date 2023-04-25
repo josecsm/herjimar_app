@@ -195,4 +195,4 @@ override_doctype_dashboards = {
 #    "Hoja Verde": "herjimar.herjimar.hoja_verde_dashboard"
 }
 
-fixtures = ['Custom Field']
+fixtures = ['Project']
