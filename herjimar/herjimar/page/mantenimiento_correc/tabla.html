@@ -1,0 +1,37 @@
+<div class="div_main">
+
+    <div style="padding: 20px;padding-bottom: 0px;" class="row">
+
+        {% var indice = 0; %}
+        {% for revision in revisiones %}
+         <div class="filtro-codigo col-md-4">
+            <div  style="margin:auto; padding: 10px;" class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
+                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{maquinas[revision.equipo].código_mh}}</h5>
+                    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Clase: {{maquinas[revision.equipo].clase}}/{{maquinas[revision.equipo].tipo_de_equipo}}</p>
+                    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Equipo: {{maquinas[revision.equipo].marca}} {{maquinas[revision.equipo].modelo }} {{maquinas[revision.equipo].número_de_serie }}</p>
+                <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Asignado: {{maquinas[revision.equipo].operario}}</p>
+                <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Problema: {{revision.descripcion_entrada}}</p>
+                
+                <button onclick="frappe.pages.mantenimiento_correc.realizar_mantenimiento(event);" data-revision="{{revision.name}}"  data-maquina="{{maquinas[revision.equipo].código_mh}}"  class="btn btn-primary btn-sm primary-action">
+                    Realizar Mantenimiento Correctivo
+                </button>
+
+            </div>
+        </div>
+
+        {% indice=indice+1 %}
+
+        {% if((indice % 3)==0) { %}
+    </div>
+    <div style="padding: 20px;padding-bottom: 0px;" class="row">
+        {% } %}
+
+        {% endfor %}
+       
+
+    </div>
+    <BR/>
+    <BR/>
+    <BR/>
+</div>
+
