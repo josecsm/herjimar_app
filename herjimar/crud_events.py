@@ -66,7 +66,22 @@ def on_update_quotation(doc, method=None):
     #doc.save()
     return doc
 
+def on_update_employee(doc, method=None):
 
+    soldadores=frappe.db.get_list('Soldadores',
+        filters={
+            'empleado': doc.name
+        }
+        , fields = ["name"])
+
+    for soldador in soldadores:
+        doc2=frappe.get_doc('Soldadores', soldador.name)
+        if (doc.status!="Left"):
+            doc2.activo=1
+        else:
+            doc2.activo=0
+        doc2.save()
+    pass
 def on_update_proyecto(doc, method=None):
 
     hvs=frappe.db.get_list('Hoja Verde',
@@ -97,6 +112,13 @@ def on_update_proyecto(doc, method=None):
 
     return doc
 
+def on_update_revision_correctivo(doc, method=None):
+
+    frappe.db.commit()
+    args = 'cd /var/www/html/erpnext && php artisan genera:excel_mantenimiento_correctivo '+doc.name
+    os.popen(args)
+    pass
+
 def after_insert_revision_equipamiento(doc, method=None):
 
     frappe.db.commit()
@@ -116,10 +138,10 @@ def after_insert_revision_equipamiento(doc, method=None):
 
 def after_insert_Issue(doc, method=None):
 
-    responsable=frappe.get_doc('Employee', doc.responsable)
+    responsable=frappe.get_doc('User', doc.responsable)
         
     email_args = {
-        "recipients":responsable.prefered_email,
+        "recipients":responsable.email,
         "message": "Se ha creado una nueva solicitud de soporte (<a href='https://erp.herjimar.com/desk#Form/Issue/"+doc.name+"'>"+doc.name+"</a>) de la que usted es responsable. Ver incidencia adjunta",
         "subject": 'Nueva Solicitud de Sorporte',
         "attachments": [frappe.attach_print(doc.doctype, doc.name, lang='es', file_name=doc.name)],

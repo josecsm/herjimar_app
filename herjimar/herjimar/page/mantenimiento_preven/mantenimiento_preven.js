@@ -98,6 +98,12 @@ frappe.pages['mantenimiento-preven'].formGenerica = function (maquina,hacer) {
 		title: 'Mantenimiento Genérico '+maquina,
 		fields: [
 			{
+				label: 'Fecha',
+				fieldname: 'fecha',
+				fieldtype: 'Date',
+				reqd: 1
+			},
+			{
 				label: 'Horas',
 				fieldname: 'horas',
 				fieldtype: 'Float',
@@ -166,6 +172,12 @@ frappe.pages['mantenimiento-preven'].formHornos = function (maquina,m1,m2) {
 		title: 'Mantenimiento Hornos '+maquina,
 		fields: [
 			{
+				label: 'Fecha',
+				fieldname: 'fecha',
+				fieldtype: 'Date',
+				reqd: 1
+			},
+			{
 				label: 'Horas',
 				fieldname: 'horas',
 				fieldtype: 'Float',
@@ -226,6 +238,12 @@ frappe.pages['mantenimiento-preven'].formEstufas = function (maquina,m1,m2,m3) {
 	d = new frappe.ui.Dialog({
 		title: 'Mantenimiento Estufas '+maquina,
 		fields: [
+			{
+				label: 'Fecha',
+				fieldname: 'fecha',
+				fieldtype: 'Date',
+				reqd: 1
+			},
 			{
 				label: 'Horas',
 				fieldname: 'horas',
@@ -294,6 +312,12 @@ frappe.pages['mantenimiento-preven'].formSoldar = function (maquina,i1,i2,i3,v1,
 	d = new frappe.ui.Dialog({
 		title: 'Mantenimiento Grupo de Soldar '+maquina,
 		fields: [
+			{
+				label: 'Fecha',
+				fieldname: 'fecha',
+				fieldtype: 'Date',
+				reqd: 1
+			},
 			{
 				label: 'Horas',
 				fieldname: 'horas',

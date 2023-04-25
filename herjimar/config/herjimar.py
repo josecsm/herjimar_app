@@ -34,6 +34,13 @@ def get_data():
 					"label": _("Mantenimiento Preventivo"),
 					"icon": "fa fa-bar-chart",
 					"onboard": 1,
+				},
+				{
+					"type": "page",
+					"name": "mantenimiento-correc",
+					"label": _("Mantenimiento Correctivo"),
+					"icon": "fa fa-bar-chart",
+					"onboard": 1,
 				}
 			]
 		},

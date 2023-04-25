@@ -6,6 +6,56 @@ from datetime import date, timedelta, datetime
 
 
 @frappe.whitelist(allow_guest=True)
+def empleado_dashboard(employee,date):
+    leave_allocation = {}
+    tipos=["Vacaciones","TxT"]
+    for tipo in tipos:
+        total_allocated_leaves = frappe.db.get_value('Leave Ledger Entry', {
+            'from_date': ('=', date[0:4]+'-01-01'),
+            'leave_type': tipo,
+            'transaction_type': "Leave Allocation",
+            'employee': employee,
+            'is_carry_forward': 0,
+            'docstatus': 1
+            }, 'SUM(leaves)') or 0
+        arrastradas = frappe.db.get_value('Leave Ledger Entry', {
+            'from_date': ('=', date[0:4]+'-01-01'),
+            'leave_type': tipo,
+            'transaction_type': "Leave Allocation",
+            'employee': employee,
+            'is_carry_forward': 1,
+            'docstatus': 1
+            }, 'SUM(leaves)') or 0
+        leaves_taken = frappe.db.get_value('Leave Ledger Entry', {
+            'from_date': ('>=', date[0:4]+'-01-01'),
+            'leave_type': tipo,
+            'transaction_type': "Leave Application",
+            'employee': employee,
+            'docstatus': 1
+            }, 'SUM(leaves)') or 0
+
+        borrador = frappe.db.get_value('Leave Application', {
+            'from_date': ('>=', date[0:4]+'-01-01'),
+            'leave_type': tipo,
+            'employee': employee,
+            "status": "Open"
+            }, 'SUM(total_leave_days)') or 0
+        
+        leave_allocation[tipo] = {
+            "total_leaves": total_allocated_leaves,
+            "expired_leaves": arrastradas,
+            "total_leaves2": total_allocated_leaves+arrastradas,
+            "leaves_taken": leaves_taken * -1,
+            "pending_leaves": borrador,
+            "remaining_leaves": total_allocated_leaves+arrastradas+leaves_taken
+        }
+
+    ret = {
+        'leave_allocation': leave_allocation,
+    }
+    return ret
+
+@frappe.whitelist(allow_guest=True)
 def resumen_excel(empleado,ejercicio):
 
     log=frappe.logger("herjimar")

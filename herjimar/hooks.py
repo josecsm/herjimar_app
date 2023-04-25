@@ -141,6 +141,9 @@ doc_events = {
     "Issue":{
         "after_insert": "herjimar.crud_events.after_insert_Issue",
     },
+    "Employee":{
+         "on_update": "herjimar.crud_events.on_update_employee",
+    },
     "File":{
     #    "before_insert": "herjimar.crud_events.after_insert_File",
         "after_insert": "herjimar.crud_events.after_insert_File",

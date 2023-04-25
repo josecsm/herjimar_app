@@ -18,6 +18,7 @@ def revision_soldadura(valores, maquina):
     doc.horas=parametros['horas']
     doc.empleado=parametros['empleado']
     doc.tipo='Equipos de Soldadura'
+    doc.fecha=parametros['fecha']
     doc.intensidad1=parametros['imedida1']
     doc.intensidad2=parametros['imedida2']
     doc.intensidad3=parametros['imedida3']
@@ -91,39 +92,39 @@ def revision_soldadura(valores, maquina):
         doc.observaciones=parametros['observaciones']
     doc.insert()
 # actualizar maquina
-    doc2.fecha_última_acción_preventiva = datetime.now().strftime("%Y-%m-%d")
+    doc2.fecha_última_acción_preventiva =  parametros['fecha']
     log.info(">"+doc2.periodicidad_revisiones_meses+"<")
     if (doc2.periodicidad_revisiones_meses=="1 mes"):
-        date = datetime.now()
+        date = datetime.strptime(parametros['fecha'], "%Y-%m-%d")
         date = date + relativedelta(months=+1)
         doc2.fecha_próxima_acción = date.strftime("%Y-%m-%d")
         log.info(">"+date.strftime("%Y-%m-%d")+"<")
     if (doc2.periodicidad_revisiones_meses=="3 meses"):
-        date = datetime.now()
+        date = datetime.strptime(parametros['fecha'], "%Y-%m-%d")
         date = date + relativedelta(months=+3)
         doc2.fecha_próxima_acción = date.strftime("%Y-%m-%d")
     if (doc2.periodicidad_revisiones_meses=="6 meses"):
-        date = datetime.now()
+        date = datetime.strptime(parametros['fecha'], "%Y-%m-%d")
         date = date + relativedelta(months=+6)
         doc2.fecha_próxima_acción = date.strftime("%Y-%m-%d")
     if (doc2.periodicidad_revisiones_meses=="12 meses"):
-        date = datetime.now()
+        date = datetime.strptime(parametros['fecha'], "%Y-%m-%d")
         date = date + relativedelta(months=+12)
         doc2.fecha_próxima_acción = date.strftime("%Y-%m-%d")
     if (doc2.periodicidad_revisiones_meses=="24 meses"):
-        date = datetime.now()
+        date = datetime.strptime(parametros['fecha'], "%Y-%m-%d")
         date = date + relativedelta(months=+24)
         doc2.fecha_próxima_acción = date.strftime("%Y-%m-%d")
     if (doc2.periodicidad_revisiones_meses=="36 meses"):
-        date = datetime.now()
+        date = datetime.strptime(parametros['fecha'], "%Y-%m-%d")
         date = date + relativedelta(months=+36)
         doc2.fecha_próxima_acción = date.strftime("%Y-%m-%d")
     if (doc2.periodicidad_revisiones_meses=="48 meses"):
-        date = datetime.now()
+        date = datetime.strptime(parametros['fecha'], "%Y-%m-%d")
         date = date + relativedelta(months=+48)
         doc2.fecha_próxima_acción = date.strftime("%Y-%m-%d")
     doc2.save()
-    frappe.db.commit()
+    #frappe.db.commit()
     # generar excel y enviarlo por mail y sharepoint
     #args = 'cd /var/www/html/erpnext && php artisan genera:excel_mantenimiento_soldadura '+doc.name
     #so = os.popen(args).read() 
@@ -140,6 +141,7 @@ def revision_estufa(valores, maquina):
     doc2 = frappe.get_doc('Equipamiento', maquina)
     doc.equipo = maquina
     doc.horas=parametros['horas']
+    doc.fecha=parametros['fecha']
     doc.empleado=parametros['empleado']
     doc.tipo='Estufas'
 
@@ -189,35 +191,35 @@ def revision_estufa(valores, maquina):
 # actualizar maquina
    
     #doc2.estado = parametros['nuevo_estado']
-    doc2.fecha_última_acción_preventiva = datetime.now().strftime("%Y-%m-%d")
+    doc2.fecha_última_acción_preventiva =  parametros['fecha']
     log.info(">"+doc2.periodicidad_revisiones_meses+"<")
     if (doc2.periodicidad_revisiones_meses=="1 mes"):
-        date = datetime.now()
+        date = datetime.strptime(parametros['fecha'], "%Y-%m-%d")
         date = date + relativedelta(months=+1)
         doc2.fecha_próxima_acción = date.strftime("%Y-%m-%d")
         log.info(">"+date.strftime("%Y-%m-%d")+"<")
     if (doc2.periodicidad_revisiones_meses=="3 meses"):
-        date = datetime.now()
+        date = datetime.strptime(parametros['fecha'], "%Y-%m-%d")
         date = date + relativedelta(months=+3)
         doc2.fecha_próxima_acción = date.strftime("%Y-%m-%d")
     if (doc2.periodicidad_revisiones_meses=="6 meses"):
-        date = datetime.now()
+        date = datetime.strptime(parametros['fecha'], "%Y-%m-%d")
         date = date + relativedelta(months=+6)
         doc2.fecha_próxima_acción = date.strftime("%Y-%m-%d")
     if (doc2.periodicidad_revisiones_meses=="12 meses"):
-        date = datetime.now()
+        date = datetime.strptime(parametros['fecha'], "%Y-%m-%d")
         date = date + relativedelta(months=+12)
         doc2.fecha_próxima_acción = date.strftime("%Y-%m-%d")
     if (doc2.periodicidad_revisiones_meses=="24 meses"):
-        date = datetime.now()
+        date = datetime.strptime(parametros['fecha'], "%Y-%m-%d")
         date = date + relativedelta(months=+24)
         doc2.fecha_próxima_acción = date.strftime("%Y-%m-%d")
     if (doc2.periodicidad_revisiones_meses=="36 meses"):
-        date = datetime.now()
+        date = datetime.strptime(parametros['fecha'], "%Y-%m-%d")
         date = date + relativedelta(months=+36)
         doc2.fecha_próxima_acción = date.strftime("%Y-%m-%d")
     if (doc2.periodicidad_revisiones_meses=="48 meses"):
-        date = datetime.now()
+        date = datetime.strptime(parametros['fecha'], "%Y-%m-%d")
         date = date + relativedelta(months=+48)
         doc2.fecha_próxima_acción = date.strftime("%Y-%m-%d")
     doc2.save()
@@ -238,6 +240,8 @@ def revision_horno(valores, maquina):
     doc2 = frappe.get_doc('Equipamiento', maquina)
     doc.equipo = maquina
     doc.horas=parametros['horas']
+    doc.fecha=parametros['fecha']
+
     doc.empleado=parametros['empleado']
     doc.tipo='Hornos'
 
@@ -266,35 +270,35 @@ def revision_horno(valores, maquina):
 # actualizar maquina
     
     #doc2.estado = parametros['nuevo_estado']
-    doc2.fecha_última_acción_preventiva = datetime.now().strftime("%Y-%m-%d")
+    doc2.fecha_última_acción_preventiva = parametros['fecha']
     log.info(">"+doc2.periodicidad_revisiones_meses+"<")
     if (doc2.periodicidad_revisiones_meses=="1 mes"):
-        date = datetime.now()
+        date = datetime.strptime(parametros['fecha'], "%Y-%m-%d")
         date = date + relativedelta(months=+1)
         doc2.fecha_próxima_acción = date.strftime("%Y-%m-%d")
         log.info(">"+date.strftime("%Y-%m-%d")+"<")
     if (doc2.periodicidad_revisiones_meses=="3 meses"):
-        date = datetime.now()
+        date = datetime.strptime(parametros['fecha'], "%Y-%m-%d")
         date = date + relativedelta(months=+3)
         doc2.fecha_próxima_acción = date.strftime("%Y-%m-%d")
     if (doc2.periodicidad_revisiones_meses=="6 meses"):
-        date = datetime.now()
+        date = datetime.strptime(parametros['fecha'], "%Y-%m-%d")
         date = date + relativedelta(months=+6)
         doc2.fecha_próxima_acción = date.strftime("%Y-%m-%d")
     if (doc2.periodicidad_revisiones_meses=="12 meses"):
-        date = datetime.now()
+        date = datetime.strptime(parametros['fecha'], "%Y-%m-%d")
         date = date + relativedelta(months=+12)
         doc2.fecha_próxima_acción = date.strftime("%Y-%m-%d")
     if (doc2.periodicidad_revisiones_meses=="24 meses"):
-        date = datetime.now()
+        date = datetime.strptime(parametros['fecha'], "%Y-%m-%d")
         date = date + relativedelta(months=+24)
         doc2.fecha_próxima_acción = date.strftime("%Y-%m-%d")
     if (doc2.periodicidad_revisiones_meses=="36 meses"):
-        date = datetime.now()
+        date = datetime.strptime(parametros['fecha'], "%Y-%m-%d")
         date = date + relativedelta(months=+36)
         doc2.fecha_próxima_acción = date.strftime("%Y-%m-%d")
     if (doc2.periodicidad_revisiones_meses=="48 meses"):
-        date = datetime.now()
+        date = datetime.strptime(parametros['fecha'], "%Y-%m-%d")
         date = date + relativedelta(months=+48)
         doc2.fecha_próxima_acción = date.strftime("%Y-%m-%d")
     doc2.save()
@@ -314,6 +318,8 @@ def revision_generica(valores, maquina):
     doc2 = frappe.get_doc('Equipamiento', maquina)
     doc.equipo = maquina
     doc.horas=parametros['horas']
+    doc.fecha=parametros['fecha']
+
     doc.empleado=parametros['empleado']
     doc.tipo='Genérica'
 
@@ -337,35 +343,35 @@ def revision_generica(valores, maquina):
     doc.insert()
 # actualizar maquina
     #doc2.estado = parametros['nuevo_estado']
-    doc2.fecha_última_acción_preventiva = datetime.now().strftime("%Y-%m-%d")
+    doc2.fecha_última_acción_preventiva = parametros['fecha']
     log.info(">"+doc2.periodicidad_revisiones_meses+"<")
     if (doc2.periodicidad_revisiones_meses=="1 mes"):
-        date = datetime.now()
+        date = datetime.strptime(parametros['fecha'], "%Y-%m-%d")
         date = date + relativedelta(months=+1)
         doc2.fecha_próxima_acción = date.strftime("%Y-%m-%d")
         log.info(">"+date.strftime("%Y-%m-%d")+"<")
     if (doc2.periodicidad_revisiones_meses=="3 meses"):
-        date = datetime.now()
+        date = datetime.strptime(parametros['fecha'], "%Y-%m-%d")
         date = date + relativedelta(months=+3)
         doc2.fecha_próxima_acción = date.strftime("%Y-%m-%d")
     if (doc2.periodicidad_revisiones_meses=="6 meses"):
-        date = datetime.now()
+        date = datetime.strptime(parametros['fecha'], "%Y-%m-%d")
         date = date + relativedelta(months=+6)
         doc2.fecha_próxima_acción = date.strftime("%Y-%m-%d")
     if (doc2.periodicidad_revisiones_meses=="12 meses"):
-        date = datetime.now()
+        date = datetime.strptime(parametros['fecha'], "%Y-%m-%d")
         date = date + relativedelta(months=+12)
         doc2.fecha_próxima_acción = date.strftime("%Y-%m-%d")
     if (doc2.periodicidad_revisiones_meses=="24 meses"):
-        date = datetime.now()
+        date = datetime.strptime(parametros['fecha'], "%Y-%m-%d")
         date = date + relativedelta(months=+24)
         doc2.fecha_próxima_acción = date.strftime("%Y-%m-%d")
     if (doc2.periodicidad_revisiones_meses=="36 meses"):
-        date = datetime.now()
+        date = datetime.strptime(parametros['fecha'], "%Y-%m-%d")
         date = date + relativedelta(months=+36)
         doc2.fecha_próxima_acción = date.strftime("%Y-%m-%d")
     if (doc2.periodicidad_revisiones_meses=="48 meses"):
-        date = datetime.now()
+        date = datetime.strptime(parametros['fecha'], "%Y-%m-%d")
         date = date + relativedelta(months=+48)
         doc2.fecha_próxima_acción = date.strftime("%Y-%m-%d")
     doc2.save()
